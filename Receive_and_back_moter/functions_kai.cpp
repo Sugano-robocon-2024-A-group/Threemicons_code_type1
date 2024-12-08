@@ -7,10 +7,12 @@ const uint8_t motor_pwm[2] =  {13, 4};
 const uint8_t motor_dir1[2] = {25, 32};
 const uint8_t motor_dir2[2] = {14, 33};
 
+//Rb P上げる　Lb　Dゲイン　
+
 // PID制御のゲイン 後ろ
 const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.0, 0.0};
-const float kd[2] = {15.0, 25.0};
+const float kd[2] = {15.0, 15.0};//
 int k[2]={120,110};
 
 //PID制御に関する変数

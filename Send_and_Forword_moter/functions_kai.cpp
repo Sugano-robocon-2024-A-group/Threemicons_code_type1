@@ -12,10 +12,13 @@ const uint8_t motor_dir2[2] = {19, 23};
 //ledcSetup ( チャンネル , 周波数 , bit数(分解能) ) ;　//PWM出力波形の初期設定
 //ledcAttachPin( 端子番号 , チャンネル ) ;
 
+//Rf P上げる　Lf　Dゲイン　
+
 // PID制御のゲイン 前
+//
 const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.0, 0.0};
-const float kd[2] = {20.0, 20.0};
+const float kd[2] = {15.0, 15.0};
 int k[2]={130,105};
 
 //PID制御に関する変数
