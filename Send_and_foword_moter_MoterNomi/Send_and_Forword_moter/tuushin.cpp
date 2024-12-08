@@ -23,16 +23,6 @@ void sendPacket(int Ashimawari_Command) {
 }
 
 
-void sendToutekiCommand(){
-  Serial.print("ToutekiCommand");
-  CAN.beginPacket(0x15);  // CANパケットを送信。ID: 0x15
-  CAN.write(static_cast<uint8_t>(Ashimawari_Command));
-  CAN.endPacket();  // 送信終了
-  Serial.println("done");
-  }
-
-
-
 // receivePacket関数: CANメッセージを受信し、内容を表示する
 /*
 void receivePacket() {

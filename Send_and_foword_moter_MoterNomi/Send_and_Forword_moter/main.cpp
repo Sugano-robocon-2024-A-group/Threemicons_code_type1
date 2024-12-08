@@ -84,8 +84,6 @@ Serial.println("Start"); 打ちまくる系OK⇒送信系⇒Encoder読み⇒前�
   Serial.printf("%d\n",Ashimawari_Command);//Debug
       
   sendPacket(Ashimawari_Command);
-  //ここで、もう一つSendを使う
-  sendToutekiCommand(Ashimawari_Command);
 
   //ここで動作処理をする。
   //Encoder読み
