@@ -18,11 +18,18 @@ const int allowableError = 5;
 const float wheelDiameter = 80.0;
 const float encoderPulsesPerRevolution = 750;
 const float distancePerCount = (PI * wheelDiameter) / encoderPulsesPerRevolution;
-
-void onReceive(int packetSize) {
+/*
+void onReceive(int packetSize){
 // 割り込み時の処理をここに書く
 Serial.println("ReceivePacket");
 receivePacket(id, data, length);
+delay(1000);
+}*/
+void onReceive(int packetSize){
+//int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
+  if (packetSize==1){
+    
+    }
 }
 
 // setup関数: 初期設定を行う。CANバスの初期化と、送受信の設定を呼び出す
@@ -76,8 +83,10 @@ void loop() {
 //Serial.print("NEXT！");
 //handleMoterInput(targetDistance, data[0]);
 
-int packetSize = CAN.parsePacket();
-if (receivePacket) { 
+handleMoterInput(targetDistance, data[0]);
+
+//int packetSize = CAN.parsePacket();
+//if (receivePacket) { 
     Serial.print(data[0]);
     //Serial.print(data[1]);データないやつ入れちゃうとエラーして落ちちゃう
     //Serial.print(data[2]);Serial.print(data[3]);
@@ -122,11 +131,11 @@ bool reachedTarget = true;
         Serial.print("reachedTarget\n");
         handleMoterInput(targetDistance, data[0]);
     }
- 
+/*
 for (int i = 0; i < 1; i++) {
     data[i] = 0;
-    }
-}
+    }*/
+//}
  delay(40);  // 1秒の遅延
 }
 
