@@ -85,7 +85,7 @@ void loop() {
       PS4_L1=1;//]
       Serial.printf("%d\n", PS4_L1);
       }
-  sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
+  sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);//先に送る
   if (PS4.Right()){Ashimawari_Command=3;
       }
       if (PS4.Down()){Ashimawari_Command=2;
