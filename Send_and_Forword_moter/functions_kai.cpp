@@ -7,6 +7,11 @@ const uint8_t motor_pwm[2] =  {21, 16};
 const uint8_t motor_dir1[2] = {18, 22};
 const uint8_t motor_dir2[2] = {19, 23};
 
+//PWMのSetUP
+//pinMode( 端子番号 , OUTPUT ) ;　// PWM出力を行う端子を出力端子として設定
+//ledcSetup ( チャンネル , 周波数 , bit数(分解能) ) ;　//PWM出力波形の初期設定
+//ledcAttachPin( 端子番号 , チャンネル ) ;
+
 // PID制御のゲイン 前
 const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.0, 0.0};

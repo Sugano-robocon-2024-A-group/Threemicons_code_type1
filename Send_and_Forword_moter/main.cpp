@@ -12,7 +12,8 @@
   int PS4_R1=0;
   int PS4_L1=0;
 
-//int currentAngle = 0;        // サーボの初期角度
+//int currentAngle = 0;        
+//
 
 int Ashimawari_Command=0;//コマンド
 
@@ -54,6 +55,9 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
     pinMode(encoderA[i], INPUT_PULLUP);
     pinMode(encoderB[i], INPUT_PULLUP);
   }
+
+  init_pwm_setup();
+  
   // 割り込みの設定
   attachInterrupt(digitalPinToInterrupt(encoderA[0]), []() { handleEncoder(0); }, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoderA[1]), []() { handleEncoder(1); }, CHANGE);
@@ -123,7 +127,7 @@ void loop() {
 //移動関数
 bool reachedTarget = true;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 2; i++) {
         float currentDistance = encoderCount[i] * distancePerCount;
         float controlSignal = pidCompute(i, targetDistance[i], currentDistance);
        /* if(controlSignal<100.0){

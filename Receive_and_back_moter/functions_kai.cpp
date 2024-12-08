@@ -114,50 +114,51 @@ void resetControlVariables() {
 
 //
 void handleMoterInput(float* targetDistance, int command){
- if (PS4.Right())
+ if (command==3)
       {
         Serial.println("Right");
         targetDistance[0] = -travelDistance;
         targetDistance[1] = travelDistance;
       }
-      if (PS4.Down())
+      if (command==2)
       {
         Serial.println("Down");
         targetDistance[0] = -travelDistance;
         targetDistance[1] = -travelDistance;
       }
-      if (PS4.Up())
+      if (command==1)
       {
         Serial.println("Up");
         targetDistance[0] = travelDistance;
         targetDistance[1] = travelDistance;
+        //delay(5000);
       }
-      if (PS4.Left())
+      if (command==4)
       {
         Serial.println("Left");
         targetDistance[0] = travelDistance;
         targetDistance[1] = -travelDistance;
       }
 
-      if (PS4.UpRight())
+      if (command==5)
       {
         Serial.println("Up Right");
         targetDistance[0] = 0.0;
         targetDistance[1] = travelDistance;
       }
-      if (PS4.DownRight())
+      if (command==6)
       {
         Serial.println("Down Right");
         targetDistance[0] = -travelDistance;
         targetDistance[1] = 0.0;
       }
-      if (PS4.UpLeft())
+      if (command==7)
       {
         Serial.println("Up Left");
         targetDistance[0] = travelDistance;
         targetDistance[1] = 0.0;
       }
-      if (PS4.DownLeft())
+      if (command==8)
       {
         Serial.println("Down Left");
         targetDistance[0] = 0.0;
