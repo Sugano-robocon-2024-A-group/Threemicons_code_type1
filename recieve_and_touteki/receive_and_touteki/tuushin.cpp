@@ -28,11 +28,14 @@ void sendPacket(int Ashimawari_Command) {
 
 // receivePacket関数: CANメッセージを受信し、内容を表示する
 void receivePacket(uint32_t &id, uint16_t *data, uint16_t &length) {
-  delay(10); 
+  //delay(10); 
   int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
-
-  if (packetSize>0) {  // パケットが受信された場合
+  //Serial.print("receivepacket\n ");
+  /*if(packetSize>0){
     Serial.print("Received ");
+  }*/
+  if (packetSize==4) {  // パケットが受信された場合
+    //Serial.print("Received ");
 
     for (int i = 0; i < length; i++) {
   uint8_t byte = CAN.read();  // 1 バイト読み取る

@@ -15,10 +15,10 @@ void setupSender() {
 
 // receivePacket関数: CANメッセージを受信し、内容を表示する
 void receivePacket(uint32_t &id, uint16_t *data, uint16_t &length) {
-  delay(10); 
+  //delay(10); 
   int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
 
-  if (packetSize>0) {  // パケットが受信された場合
+  if (packetSize==1) {  // パケットが受信された場合
     Serial.print("Received ");
 
     for (int i = 0; i < length; i++) {
