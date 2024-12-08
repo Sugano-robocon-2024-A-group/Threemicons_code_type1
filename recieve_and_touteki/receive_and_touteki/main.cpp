@@ -20,7 +20,7 @@ const int PIN_SYASYUTU_2 = 21;
 int syasyutu_condition = 0;
 
 // 目標電圧（ここに外部からの値が設定される）
-float targetVoltage = 3.5;      // 初期値として3.5Vを設定
+float targetVoltage = 4.2;      // 初期値として4.2Vを設定
 // 電圧範囲
 const float maxVoltage = 8.0;   // 最大電圧
 const float minVoltage = 0.0;   // 最小電圧
