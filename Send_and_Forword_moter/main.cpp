@@ -70,16 +70,20 @@ void loop() {
 /**/
   // 送信処理を実行
    if (PS4.Circle()){Serial.println("Circle Button");
-      PS4_Circle=1;//Serial.printf("%d\n", PS4_Circle); 
+      PS4_Circle=1;//
+      Serial.printf("%d\n", PS4_Circle); 
     }
     if (PS4.Triangle()) {Serial.println("Triangle Button");
-      PS4_Triangle=1;//Serial.printf("%d\n", PS4_Triangle);
+      PS4_Triangle=1;//
+      Serial.printf("%d\n", PS4_Triangle);
       }
     if (PS4.R1()){Serial.println("R1 Button");
-      PS4_R1=1;//Serial.printf("%d\n", PS4_R1);
+      PS4_R1=1;//
+      Serial.printf("%d\n", PS4_R1);
       }
      if (PS4.L1()){Serial.println("L1 Button");
-      PS4_L1=1;//Serial.printf("%d\n", PS4_L1);
+      PS4_L1=1;//]
+      Serial.printf("%d\n", PS4_L1);
       }
   if (PS4.Right()){Ashimawari_Command=3;
       }
@@ -101,6 +105,8 @@ void loop() {
       
   sendPacket(Ashimawari_Command);
   //ここで、もう一つSendを使う
+  //sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
+  delay(10);
   sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
 
   //ここで動作処理をする。

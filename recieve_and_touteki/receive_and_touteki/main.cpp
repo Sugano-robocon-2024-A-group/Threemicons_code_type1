@@ -81,7 +81,7 @@ gyoukakuServo.write(45);  // 初期位置を20度（中央）に設定
 // loop関数: 受信と送信を繰り返す
 void loop() {
   Serial.print("touteki");
-  
+  Serial.println(id);
 receivePacket(id, data, length);
 // CANメッセージを受信
 
