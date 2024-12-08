@@ -106,8 +106,8 @@ bool reachedTarget = true;
         //ここでTargetも0にする
          for (int j = 0; j < 4; j++) {
         targetDistance[j]=0.0;
-         }
-        Serial.print("reachedTarget\n");*/
+         }*/
+        Serial.print("reachedTarget\n");
         handleMoterInput(targetDistance, data[0]);
     }
  
