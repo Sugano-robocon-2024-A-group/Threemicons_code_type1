@@ -28,6 +28,8 @@ delay(1000);
 void onReceive(int packetSize){
 //int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
   if (packetSize==1){
+    Serial.println("CAN Communication");
+    data[0]=CAN.read();
     
     }
 }
