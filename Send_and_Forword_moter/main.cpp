@@ -4,7 +4,7 @@
 #include <ESP32Servo.h>  // ESP32用のサーボライブラリ
 #include "tuushin.h"  // tuushin.hをインクルード
 #include "encoder.h"
-//#include "functions.h"//運転関連のものはここに入っている。
+#include "functions_kai.h"//運転関連のものはここに入っている。
 
 //使用ボタン設定
   int PS4_Circle=0;
@@ -145,11 +145,7 @@ bool reachedTarget = true;
          for (int j = 0; j < 4; j++) {targetDistance[j]=0.0;
          }*/
         Serial.print("reachedTarget\n");
-        handleMoterInput(targetDistance, data[0]);
-    }
- 
-for (int i = 0; i < 1; i++) {
-    data[i] = 0;
+        handleMoterInput(targetDistance, Ashimawari_Command);
     }
   Ashimawari_Command=0;//初期化
   PS4_Circle=0;
