@@ -85,6 +85,7 @@ void loop() {
       PS4_L1=1;//]
       Serial.printf("%d\n", PS4_L1);
       }
+  sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
   if (PS4.Right()){Ashimawari_Command=3;
       }
       if (PS4.Down()){Ashimawari_Command=2;
@@ -102,12 +103,12 @@ void loop() {
       if (PS4.DownLeft()){Ashimawari_Command=8;
       }
   Serial.printf("%d\n",Ashimawari_Command);//Debug
-      
+  delay(10);   
   sendPacket(Ashimawari_Command);
   //ここで、もう一つSendを使う
   //sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
   delay(10);
-  sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
+  //sendToutekiCommand(PS4_Circle, PS4_Triangle, PS4_R1, PS4_L1);
 
   //ここで動作処理をする。
   //Encoder読み
