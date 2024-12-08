@@ -16,7 +16,7 @@ const uint8_t motor_dir2[2] = {19, 23};
 
 // PID制御のゲイン 前
 //
-const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
+const float kp[2] = {15.0, 15.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.0, 0.0};
 const float kd[2] = {15.0, 15.0};
 int k[2]={130,105};
@@ -26,6 +26,10 @@ float integral[2]={0,0};
 float previous_error[2]={0,0};
 
 /*
+ *const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
+const float ki[2] = {0.0, 0.0};
+const float kd[2] = {15.0, 15.0};
+int k[2]={130,105};
 void handleEncoder(int index) {
     if (digitalRead(encoderA[index]) == digitalRead(encoderB[index])) {
         encoderCount[index]++;

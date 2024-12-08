@@ -14,7 +14,8 @@ const int encoderB[2] = {25, 32}; // エンコーダB相ピン{25, 32};
 
 // エンコーダのカウント値を更新する関数
 void handleEncoder(int index)
-{
+{//digitalRead(encoderA[index]) != digitalRead(encoderB[index])
+  //Serial.print(encoderA[index]);
   if (index < 1)  // 左側のモーターの場合
   {
     if (digitalRead(encoderA[index]) != digitalRead(encoderB[index]))
