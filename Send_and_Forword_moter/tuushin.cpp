@@ -36,6 +36,10 @@ void sendToutekiCommand(int PS4_Circle, int PS4_Triangle, int PS4_R1, int PS4_L1
   Serial.println("done");
   }
 
+  void onReceive(int packetSize) {
+
+    
+}
 
 
 // receivePacket関数: CANメッセージを受信し、内容を表示する

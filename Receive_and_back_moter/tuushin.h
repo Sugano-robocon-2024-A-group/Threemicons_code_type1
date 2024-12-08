@@ -8,4 +8,6 @@ void sendPacket(int PS4_Circle); // CANメッセージの送信
 //void receivePacket();  // CANメッセージの受信
 void receivePacket(uint32_t &id, uint16_t *data, uint16_t &length);
 
+void onReceive(int packetSize);
+
 #endif

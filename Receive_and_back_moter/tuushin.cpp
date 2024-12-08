@@ -19,7 +19,7 @@ void receivePacket(uint32_t &id, uint16_t *data, uint16_t &length) {
   int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
 
   if (packetSize==1) {  // パケットが受信された場合
-    Serial.print("Received ");
+    //Serial.print("Received ");
 
     for (int i = 0; i < length; i++) {
   uint8_t byte = CAN.read();  // 1 バイト読み取る
@@ -27,28 +27,29 @@ void receivePacket(uint32_t &id, uint16_t *data, uint16_t &length) {
     }
 
     // パケットIDを表示
-    Serial.print("packet with id 0x");
-    Serial.print(CAN.packetId(), HEX);
+    //Serial.print("packet with id 0x");
+    //Serial.print(CAN.packetId(), HEX);
 
     // RTRパケットの場合、要求された長さを表示
-    if (CAN.packetRtr()) {Serial.print(" and requested length ");
-      Serial.println(CAN.packetDlc());
-    } else {
+  /*  if (CAN.packetRtr()) {//Serial.print(" and requested length ");
+      //Serial.println(CAN.packetDlc());
+    } else {*/
       // 通常パケットの場合、受信データの長さを表示
-      Serial.print(" and length ");
-      Serial.println(packetSize);
+      //Serial.print(" and length ");
+      //Serial.println(packetSize);
       // データをシリアルに表示
       
-      while (CAN.available()) {
-        Serial.print((uint16_t)CAN.read());//⇒こいつで100って出てる。
+      //while (CAN.available()) {
+        //Serial.print((uint16_t)CAN.read());//⇒こいつで100って出てる。
     id = CAN.packetId();        // CAN IDを取得
     length = CAN.packetDlc();   // データ長を取得
     // データを配列に格納
-      }
-    Serial.println();  
-    }
+      //}
+    //Serial.println();  
+    //}
   }
 }
+
 
 
     /*拡張パケットの場合

@@ -19,6 +19,12 @@ const float wheelDiameter = 80.0;
 const float encoderPulsesPerRevolution = 750;
 const float distancePerCount = (PI * wheelDiameter) / encoderPulsesPerRevolution;
 
+void onReceive(int packetSize) {
+// 割り込み時の処理をここに書く
+Serial.println("ReceivePacket");
+receivePacket(id, data, length);
+}
+
 // setup関数: 初期設定を行う。CANバスの初期化と、送受信の設定を呼び出す
 void setup() {
   
@@ -56,18 +62,19 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
   attachInterrupt(digitalPinToInterrupt(encoderA[1]), []() { handleEncoder(1); }, CHANGE);
   /*attachInterrupt(digitalPinToInterrupt(encoderA[2]), []() { handleEncoder(2); }, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoderA[3]), []() { handleEncoder(3); }, CHANGE);*/
+
+  //CAN割り込みの設定
+  CAN.onReceive(onReceive);
 }
 
 
 // loop関数: 受信と送信を繰り返す
 void loop() {
   
-receivePacket(id, data, length);
+//receivePacket(id, data, length);
 // CANメッセージを受信
-
 //Serial.print("NEXT！");
-
-handleMoterInput(targetDistance, data[0]);
+//handleMoterInput(targetDistance, data[0]);
 
 int packetSize = CAN.parsePacket();
 if (receivePacket) { 
@@ -113,7 +120,7 @@ bool reachedTarget = true;
         targetDistance[j]=0.0;
          }*/
         Serial.print("reachedTarget\n");
-        //handleMoterInput(targetDistance, data[0]);
+        handleMoterInput(targetDistance, data[0]);
     }
  
 for (int i = 0; i < 1; i++) {

@@ -61,6 +61,7 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
   // 割り込みの設定
   attachInterrupt(digitalPinToInterrupt(encoderA[0]), []() { handleEncoder(0); }, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoderA[1]), []() { handleEncoder(1); }, CHANGE);
+
 }
 
 // loop関数 やること　CAN送信、（前輪Encoder読み、前輪回転）、いろいろやる。
