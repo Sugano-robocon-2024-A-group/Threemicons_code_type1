@@ -80,9 +80,12 @@ gyoukakuServo.write(45);  // 初期位置を20度（中央）に設定
 
 // loop関数: 受信と送信を繰り返す
 void loop() {
+  Serial.print("touteki");
   
 receivePacket(id, data, length);
 // CANメッセージを受信
+
+  Serial.print("Nageru");
 
 int packetSize = CAN.parsePacket();
 if (receivePacket) { 
@@ -152,14 +155,14 @@ if (receivePacket) {
        Serial.println("仰角-1");
        movegyoukakuServoBy(-1);// 現在の角度から1度動かす (+1°)
       delay(40);
-      
       }else{
         }
-     
  
 for (int i = 0; i < 8; i++) {
     data[i] = 0;
     }
 }
- //delay(40);  // 1秒の遅延
+ //
+ Serial.print("Nageru");
+ delay(40);  // 1秒の遅延
 }
