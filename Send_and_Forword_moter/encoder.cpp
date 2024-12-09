@@ -8,8 +8,8 @@ volatile int encoderCount[2] = {0, 0};// カウント値
 //extern const int encoderA[4] = {18, 25, 22, 32}; // エンコーダA相ピン
 /*const int encoderA[2] = {19, 23}; // エンコーダA相ピン
 const int encoderB[2] = {18, 22}; // エンコーダB相ピン*/
-const int encoderA[2] = {14, 33};// エンコーダA相ピン{14, 33};
-const int encoderB[2] = {25, 32}; // エンコーダB相ピン{25, 32};
+const int encoderA[2] = {14, 32};// エンコーダA相ピン{14, 33};
+const int encoderB[2] = {25, 33}; // エンコーダB相ピン{25, 32};
 
 
 // エンコーダのカウント値を更新する関数
