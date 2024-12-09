@@ -18,7 +18,7 @@ const uint8_t motor_dir2[2] = {19, 23};
 //
 const float kp[2] = {0.35, 0.1};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.2, 0.3};
-const float kd[2] = {1.2, 1.5};
+const float kd[2] = {1.3, 1.6};//1.2 1.5
 int k[2]={70,70};
 /*
  * const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
