@@ -16,10 +16,16 @@ const uint8_t motor_dir2[2] = {19, 23};
 
 // PID制御のゲイン 前
 //
-const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
+const float kp[2] = {0.35, 0.1};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
+const float ki[2] = {0.2, 0.3};
+const float kd[2] = {1.2, 1.5};
+int k[2]={70,70};
+/*
+ * const float kp[2] = {1.0, 1.0};//(0,1,2,3)  40  0.2  4,0.2 でControlの値が30
 const float ki[2] = {0.0, 0.0};
 const float kd[2] = {15.0, 15.0};
 int k[2]={130,105};
+ */
 
 //PID制御に関する変数
 float integral[2]={0,0};
