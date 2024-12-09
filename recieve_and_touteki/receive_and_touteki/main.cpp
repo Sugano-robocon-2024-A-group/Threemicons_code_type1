@@ -17,33 +17,43 @@ const int PIN_SYASYUTU_1 = 4;
 const int PIN_SYASYUTU_2 = 21;
 //21がLOW　　４　HIGH　16 PWM
 
-int syasyutu_condition = 0;
-
 // 目標電圧（ここに外部からの値が設定される）
 float targetVoltage = 4.2;      // 初期値として4.2Vを設定
 // 電圧範囲
 const float maxVoltage = 8.0;   // 最大電圧
 const float minVoltage = 0.0;   // 最小電圧
 
-const int PIN_SYASYUTU = 5;  // 
-int dutyCycle = calculateDutyCycle(targetVoltage, maxVoltage, minVoltage);
-//Max=255とした計算
+int syasyutu_condition = 0;
+int dutyCycle = calculateDutyCycle(targetVoltage, maxVoltage, minVoltage);//なんかMax510
+
+//const int PIN_SYASYUTU = 5;
+
 
 extern Servo soutenServo; // 変数は外部で定義されていると宣言
 int souten_servoPin = 13;  // サーボの接続ピンを指定（適宜変更）
 
 Servo gyoukakuServo; // 変数は外部で定義されていると宣言
-int gyoukaku_servoPin = 12;  // 仰角用サーボの接続ピンを指定（適宜変更）
+int gyoukaku_servoPin = 5;  // 仰角用サーボの接続ピンを指定（適宜変更）
 //int currentAngle = 0;        // サーボの初期角度
+
+
+void onReceive(int packetSize){
+//int packetSize = CAN.parsePacket();  // 受信したパケットのサイズを取得
+  if (packetSize==4){
+    Serial.println("CAN Communication");
+    //data[0]=CAN.read();
+     for (int i = 0; i < 4; i++){
+     data[i]=CAN.read();
+    }
+    
+    }
+}
 
 // setup関数: 初期設定を行う。CANバスの初期化と、送受信の設定を呼び出す
 void setup() {
   
   Serial.begin(115200);  // シリアル通信開始
    while (!Serial);  // シリアル接続待機
-
- const int CAN_TX_PIN = 27;  // 送信ピン（GPIO27）
-const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
 
 //ピン設定 
   pinMode(souten_servoPin,OUTPUT);
@@ -60,7 +70,8 @@ soutenServo.write(45);  // 初期位置を20度（中央）に設定
 gyoukakuServo.attach(gyoukaku_servoPin);  // サーボピンを設定
 gyoukakuServo.write(45);  // 初期位置を20度（中央）に設定
 
-  Serial.println("CAN Communication");
+  const int CAN_TX_PIN = 27;  // 送信ピン（GPIO27）
+  const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）Serial.println("CAN Communication");
   CAN.setPins(CAN_RX_PIN, CAN_TX_PIN);
   // CANバスの初期化（通信速度500kbps）
   CAN.begin(500E3);
@@ -75,28 +86,28 @@ gyoukakuServo.write(45);  // 初期位置を20度（中央）に設定
   setupReceiver();
   //setupSender();
   Serial.println("Start");
-}
 
+  //CAN割り込みの設定
+  CAN.onReceive(onReceive);
+}
 
 // loop関数: 受信と送信を繰り返す
 void loop() {
-  Serial.print("touteki");
-  Serial.println(id);
-receivePacket(id, data, length);
+//Serial.print("touteki");
+//Serial.println(id);
+//receivePacket(id, data, length);
 // CANメッセージを受信
+//Serial.print("Nageru");
+//int packetSize = CAN.parsePacket();
 
-  Serial.print("Nageru");
-
-int packetSize = CAN.parsePacket();
-if (receivePacket) { 
+//if (receivePacket) { 
     Serial.print(data[0]);
     Serial.print(data[1]);
     Serial.print(data[2]);
     Serial.print(data[3]);
 
     Serial.println();
-
-   /* if(data[0]==1){//これでHIGHにする
+    /* if(data[0]==1){//これでHIGHにする
         analogWrite(PIN_SYASYUTU, dutyCycle );
         Serial.print("PWM");
       }else{
@@ -110,6 +121,7 @@ if (receivePacket) {
       }else{
         syasyutu_condition=0;  
       }
+      data[0] = 0;
       Serial.printf("%d",syasyutu_condition);
       if(syasyutu_condition==0){
         digitalWrite(PIN_SYASYUTU_PWM, LOW);//回転時間ってどんくらいですか？Dutyサイクルは先に回っています
@@ -130,10 +142,7 @@ if (receivePacket) {
     if(data[1]==1){//これでHIGHにする
       /* // analogWrite(PIN_SYASYUTU, dutyCycle );
        Serial.println("装填開始");
-      // Souten();
-      
-      Souten();
-      
+      Souten();   
       data[1]=0; // 動作が完了したらPS4_Triangleを0に戻す
       Serial.println("装填終了");
       }else{
@@ -144,24 +153,27 @@ if (receivePacket) {
       //digitalWrite(PIN_SYASYUTU,LOW);
       digitalWrite(souten_servoPin,LOW);
       Serial.println("装填終了");
+      data[1] = 0;
         }
     if(data[2]==1){//これでHIGHにする
        Serial.println("仰角+1");
       movegyoukakuServoBy(1); // 現在の角度から1度動かす (+1°)
       delay(40);
+      data[2] = 0;
       }else{
         }
     if(data[3]==1){//これでHIGHにする
        Serial.println("仰角-1");
        movegyoukakuServoBy(-1);// 現在の角度から1度動かす (+1°)
       delay(40);
+      data[3]=0;
       }else{
         }
- 
+/*割り込みなので、まとめての初期化は使えない
 for (int i = 0; i < 8; i++) {
     data[i] = 0;
     }
-}
+}*/
  //
  Serial.print("Nageru");
  delay(40);  // 1秒の遅延
