@@ -6,4 +6,7 @@
 void Souten();
 void moveServo(int startAngle, int endAngle);
 
+void Souten_hiki();
+void Souten_modoshi();
+
 #endif

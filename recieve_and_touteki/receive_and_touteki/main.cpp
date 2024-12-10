@@ -43,7 +43,9 @@ void onReceive(int packetSize){
     Serial.println("CAN Communication");
     //data[0]=CAN.read();
      for (int i = 0; i < 4; i++){
-     data[i]=CAN.read();
+     //data[i]=CAN.read();これだとだめ
+     uint8_t byte = CAN.read();  // 1 バイト読み取る
+  data[i] = static_cast<uint16_t>(byte);
     }
     
     }
@@ -140,21 +142,29 @@ void loop() {
       }
       }    
     if(data[1]==1){//これでHIGHにする
-      /* // analogWrite(PIN_SYASYUTU, dutyCycle );
-       Serial.println("装填開始");
-      Souten();   
-      data[1]=0; // 動作が完了したらPS4_Triangleを0に戻す
-      Serial.println("装填終了");
-      }else{
-        //digitalWrite(PIN_SYASYUTU,LOW);
-        Serial.print("LOW");*/
-        Serial.println("Triangle Button");//Debug  Serial.println("装填開始");
+      /*
+      Serial.println("Triangle Button");//Debug  Serial.println("装填開始");
       Souten();
       //digitalWrite(PIN_SYASYUTU,LOW);
       digitalWrite(souten_servoPin,LOW);
       Serial.println("装填終了");
       data[1] = 0;
-        }
+      ここで2分岐型*/
+      if(souten_condition==0){
+        souten_condition=1;//奇数回、ひろゲル
+      }else{
+        souten_condition=0;  
+      }
+      data[1] = 0;
+      Serial.printf("%d",souten);
+      if(syasyutu_condition==1){
+      Serial.println("Triangle Button");//Debug  Serial.println("装填開始");
+      Souten_hiki();
+      }else{
+        Serial.println("Triangle Button");
+        Souten_modoshi();
+      }
+    }
     if(data[2]==1){//これでHIGHにする
        Serial.println("仰角+1");
       movegyoukakuServoBy(1); // 現在の角度から1度動かす (+1°)

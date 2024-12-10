@@ -18,6 +18,15 @@ void Souten(){
   delay(Souten_Modoshi);                           // 一時停止
   moveServo(Souten_Motor_targetAngle, Souten_Motor_initialAngle); // 60度 -> 20度
 }
+//引いて、戻すを２つにわけるパターンを
+void Souten_hiki(){
+  moveServo(Souten_Motor_initialAngle, Souten_Motor_targetAngle); // 20度 -> 60度
+  delay(Souten_Modoshi);                           // 一時停止
+}
+void Souten_modoshi(){
+  moveServo(Souten_Motor_targetAngle, Souten_Motor_initialAngle); // 60度 -> 20度
+  delay(Souten_Modoshi);
+}
 
 // サーボの動きを制御する関数
 void moveServo(int startAngle, int endAngle) {
